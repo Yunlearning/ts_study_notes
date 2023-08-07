@@ -127,6 +127,12 @@
     - 上面 KeyType 作為 DataType 的 key 使用
 2. keyof 的使用可以將輸入的型別限定在一個範圍，可以是某個傳入物件所擁有的 key 或是 interface 定義的型別
 
+# Utility Type
+
+1. 為 ts 提供的通用類型，需查表
+2. utility functions 最大的不同在於，代入 Utility Types 的 input 會是 TypeScript 的「型別」，而不是一般的 JavaScript value，也就是說，Utility Types 會以「型別」作為 input，並且以另一個「型別」作為 output。
+3. Utility Types 就像函式一樣可以帶入 input 得到 output，透過 Utility Types 將可以「根據一個型別，來建立出另一個型別」。
+
 # ts 特點:
 
 1. ts 執行在編譯(compiler)階段而非執行(run)階段
