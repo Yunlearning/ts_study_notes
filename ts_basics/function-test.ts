@@ -1,4 +1,4 @@
-import addNumbers, { getName } from './function';
+import addNumbers, { getName } from './02-function';
 
 console.log(addNumbers(1, 2));
 // 型別錯誤

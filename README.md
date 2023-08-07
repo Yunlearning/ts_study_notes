@@ -1,4 +1,4 @@
-# 設置 TSz 方式:
+# 設置 TS 方式:
 
 -   npm init
 -   npm add typescript -D
@@ -53,6 +53,9 @@
         return `${salutation} ${names.join(' ')}`;
         }
 
+2.  如果輸入變數為可選的，可以再宣告該變數時加上?
+    -   function printIntgredient(quantity: string, ingredient: string, extra?: string)
+
 # callback 的使用方式:
 
 1. 當使用 callback 時，如果 func 不 return，可以使用 void
@@ -99,6 +102,31 @@
     - overload signatures：也就是 type definition 的部分， 通常會定義 2 種或以上。
     - function implementation：實際上執行的 function，它的型別需要滿足所有的 overload signatures。
 
+# tuples
+
+1. tuple is array
+2. 在 tuple 中的 array 裡的每個項目可以是任何類型，且彼此元素的型別也可不同
+
+# generics(ts 的重點功能)
+
+1. 使用方式:
+    -   1. 將函式內的相同型別統一為某個大寫變數(一般為 T)
+    -   2. 在函式的名稱後面加上<>，然後中間放入宣告的變數，
+            - 如:function add<T>
+2. generics 可透過該變數將型別統一，例如輸入變數以 generics 宣告，當輸入變數型別為 number，函式中以 generics 宣告的變數，其規範的型別將自動轉為 number
+3. 當使用函式時，還可以重新決定 generics 變數的輸入型別，使函式接受多種型別輸入
+    - 方式如下:
+    - add<number | null>(null)
+4. generics 可以傳遞:
+    - 564
+
+# generics with keyof
+
+1. 可以將 generics 宣告的型別作為另一型別的 key 使用
+    - 如: pluck<DataType, KeyType extends keyof DataType>
+    - 上面 KeyType 作為 DataType 的 key 使用
+2. keyof 的使用可以將輸入的型別限定在一個範圍，可以是某個傳入物件所擁有的 key 或是 interface 定義的型別
+
 # ts 特點:
 
 1. ts 執行在編譯(compiler)階段而非執行(run)階段
@@ -115,6 +143,9 @@
       return `${user?.first ?? 'first'} ${user?.last ?? 'last'}`;
       }
 4. 函式的參數在宣告時加入'?'表示該參數可以為空
+5. 可以在使用的各級變數之後加上'!'，使 ts 強制忽略該變數的值可能為 null 或 undefined 的情形，一邊情況下不建議使用
+    - ex:return user.info.email!;
+    - 見 optional.ts 範例
 
 # 使 ts 可以匯入.json
 
