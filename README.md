@@ -17,7 +17,8 @@
 
 # 定義 object 方式
 
--   一般宣告方式:
+1.  一般宣告方式:
+
     -   缺點:難以重用或修改
         const myPerson: {
         first: string;
@@ -26,7 +27,8 @@
         first: 'Jeff',
         last: 'Herrington',
         };
--   透過 interface 建立可重複使用的型別宣告
+
+2.  透過 interface 建立可重複使用的型別宣告
     interface Person {
     first: string;
     last: string;
@@ -35,10 +37,16 @@
     first: 'Jeff',
     last: 'Herrington',
     };
--   若要動態變更 object，可以宣告使用 Record
--   : Record<>
+3.  在 interface 定義的 key 前加入 readonly 可使其無法被更改
+4.  若要禁用整個 interface，則可以透過 type 然後將該 interface 前面加上 Readonly
+    -   Ex:type ReadonlyCat = Readonly<Cat>;
+5.  在 js 使用 const 時依然可以改變 array 裡的元素，在 ts 可使用下面方式使 array 裡的元素不可變更，如同 const。
+    -   在 const 的值後面加上 as const
+    -   ex:const reallyConst = [1, 2, 3] as const;
+6.  若要動態變更 object，可以宣告使用 Record
+7.  : Record<>
     -   可以定義 object 的 key/value 型別
--   使用 for/foreach/map 等迴圈時，不必特地規範型別，ts 會自行判斷
+8.  使用 for/foreach/map 等迴圈時，不必特地規範型別，ts 會自行判斷
     -   但可以規範輸出的型別
     -   const out: number[] = [4, 5, 6].map((n) => n \* 10);
 
@@ -132,6 +140,20 @@
 1. 為 ts 提供的通用類型，需查表
 2. utility functions 最大的不同在於，代入 Utility Types 的 input 會是 TypeScript 的「型別」，而不是一般的 JavaScript value，也就是說，Utility Types 會以「型別」作為 input，並且以另一個「型別」作為 output。
 3. Utility Types 就像函式一樣可以帶入 input 得到 output，透過 Utility Types 將可以「根據一個型別，來建立出另一個型別」。
+
+# Enums(枚舉) and Literal Type
+
+1. Enum 可以想成就是將東西一個一個列出來，通常會用它來管理多個同系列的常數（不可修改的變數），將常數值一一列舉出來，且只能在列舉出來的範圍中選擇
+2. 字串字面值(String Literal Types)
+    - 用來限定字串變數只能使用列舉的字串值
+    - ex:
+      ...
+      let foo: 'Hello';
+      foo = 'Bar' //Error:Type '"Bar"' is not assignable to type '"Hello"'.
+      foo = 'Hello' // OK
+      foo = null //OK
+      foo = undefined //OK
+      ...
 
 # ts 特點:
 
